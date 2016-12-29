@@ -1,4 +1,0 @@
-[submodule "libopencm3"]
-	path = libopencm3
-	url = ../libopencm3
-	branch = "master"
