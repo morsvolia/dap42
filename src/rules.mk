@@ -69,8 +69,8 @@ OOCD_BOARD     ?= target/stm32f0x.cfg
 
 ####################################################################
 # Executables
-
-PREFIX         ?= arm-none-eabi
+TOOLCHAIN 	:= /opt/bleeding-edge-arm-4_9/
+PREFIX         ?= $(TOOLCHAIN)/bin/arm-none-eabi
 
 CC             := $(PREFIX)-gcc
 CXX            := $(PREFIX)-g++
@@ -86,7 +86,7 @@ STFLASH         = $(shell which st-flash)
 # Source files
 
 INCLUDE_DIR	= $(OPENCM3_DIR)/include
-LIB_DIR		= $(OPENCM3_DIR)/lib
+LIB_DIR		= $(OPENCM3_DIR)/lib/opencm3
 
 ####################################################################
 # C flags

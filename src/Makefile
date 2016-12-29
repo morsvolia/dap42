@@ -17,7 +17,8 @@
 -include local.mk
 
 BINARY          = DAP42
-OPENCM3_DIR     = ../libopencm3
+#OPENCM3_DIR     = ../libopencm3
+OPENCM3_DIR =  $(TOOLCHAIN)/arm-none-eabi
 
 TARGET         ?= STM32F042
 include targets.mk

@@ -17,13 +17,13 @@
 ifeq ($(TARGET),STM32F042)
 	TARGET_COMMON_DIR  := ./stm32f042
 	TARGET_SPEC_DIR    := ./stm32f042/dap42
-	LDSCRIPT           ?= ./stm32f042/stm32f042x6.ld
+	LDSCRIPT           ?= ./stm32f042/stm32f072x6.ld
 	ARCH                = STM32F0
 endif
 ifeq ($(TARGET),DAP42)
 	TARGET_COMMON_DIR  := ./stm32f042
 	TARGET_SPEC_DIR    := ./stm32f042/dap42
-	LDSCRIPT           ?= ./stm32f042/stm32f042x6.ld
+	LDSCRIPT           ?= ./stm32f042/stm32f072x6.ld
 	ARCH                = STM32F0
 endif
 ifeq ($(TARGET),BRAINV3.3)
@@ -41,7 +41,7 @@ endif
 ifeq ($(TARGET),STM32F103)
 	TARGET_COMMON_DIR  := ./stm32f103
 	TARGET_SPEC_DIR    := ./stm32f103/stlinkv2-dongle
-	LDSCRIPT           ?= ./stm32f103/stm32f103x8.ld
+	LDSCRIPT           ?= ./stm32f103/stm32f103xb.ld
 	DEFS               += -DDFU_AVAILABLE=0
 	ARCH                = STM32F1
 endif
