@@ -41,10 +41,10 @@
 
 #define CONSOLE_USART_MODE USART_MODE_TX_RX
 
-#define CONSOLE_USART_CLOCK RCC_USART1
+#define CONSOLE_USART_CLOCK RCC_USART2
 
-#define CONSOLE_USART_IRQ_NAME  usart1_isr
-#define CONSOLE_USART_NVIC_LINE NVIC_USART1_IRQ
+#define CONSOLE_USART_IRQ_NAME  usart2_isr
+#define CONSOLE_USART_NVIC_LINE NVIC_USART2_IRQ
 
 /* Word size for usart_recv and usart_send */
 typedef uint16_t usart_word_t;
