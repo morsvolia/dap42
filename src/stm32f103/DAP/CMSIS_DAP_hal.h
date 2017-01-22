@@ -69,6 +69,13 @@ static __inline void PORT_OFF (void)
     GPIO_BRR(SWCLK_GPIO_PORT) = SWCLK_GPIO_PIN;
     gpio_set_mode(SWDIO_GPIO_PORT, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, SWDIO_GPIO_PIN);
     gpio_set_mode(SWCLK_GPIO_PORT, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, SWCLK_GPIO_PIN);
+#if (DAP_JTAG != 0)
+    GPIO_BRR(TDI_GPIO_PORT) = TDI_GPIO_PIN;
+    GPIO_BRR(TDO_GPIO_PORT) = TDO_GPIO_PIN;
+    gpio_set_mode(TDO_GPIO_PORT, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, TDO_GPIO_PIN);
+    gpio_set_mode(TDI_GPIO_PORT, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, TDI_GPIO_PIN);
+
+#endif
 }
 
 static __inline void PIN_SWCLK_TCK_SET (void)
@@ -144,17 +151,64 @@ static __inline void     PIN_SWDIO_OUT_DISABLE (void)
   JTAG-only functionality (not used in this application)
 */
 
-static __inline void PORT_JTAG_SETUP (void) {}
+static __inline void PORT_JTAG_SETUP (void) 
+{
+#if (DAP_JTAG != 0)
+  GPIO_BSRR(TDI_GPIO_PORT) = TDI_GPIO_PIN;
 
-static __inline uint32_t PIN_TDI_IN  (void) {  return 0; }
+  gpio_set_mode(TMS_GPIO_PORT, GPIO_MODE_OUTPUT_50_MHZ, GPIO_CNF_OUTPUT_PUSHPULL, TMS_GPIO_PIN);
+  gpio_set_mode(TCK_GPIO_PORT, GPIO_MODE_OUTPUT_50_MHZ, GPIO_CNF_OUTPUT_PUSHPULL, TCK_GPIO_PIN);
+  gpio_set_mode(TDO_GPIO_PORT, GPIO_MODE_OUTPUT_50_MHZ, GPIO_CNF_OUTPUT_PUSHPULL, TDO_GPIO_PIN);
+  gpio_set_mode(TDI_GPIO_PORT, GPIO_MODE_INPUT, GPIO_CNF_INPUT_PULL_UPDOWN, TDI_GPIO_PIN);
+#endif
+}
 
-static __inline void     PIN_TDI_OUT (uint32_t bit) { (void)bit; }
+static __inline uint32_t PIN_TDI_IN  (void) 
+{  
+#if (DAP_JTAG != 0)
+  return (GPIO_IDR(TDI_GPIO_PORT) & TDI_GPIO_PIN)? 0x1 : 0x0;
+#else
+  return 0;
+#endif
+}
 
-static __inline uint32_t PIN_TDO_IN (void) {  return 0; }
+static __inline void     PIN_TDI_OUT (uint32_t bit) 
+{ 
+#if (DAP_JTAG != 0)
+  if(bit & 0x1)
+    GPIO_BSRR(TDI_GPIO_PORT) = TDI_GPIO_PIN;
+  else
+    GPIO_BRR(TDI_GPIO_PORT) = TDI_GPIO_PIN;
+#endif
+}
 
-static __inline uint32_t PIN_nTRST_IN (void) {  return 0; }
+static __inline uint32_t PIN_TDO_IN (void) 
+{
+#if (DAP_JTAG != 0)
+  return (GPIO_IDR(TDO_GPIO_PORT) & TDO_GPIO_PIN)? 0x1 : 0x0;
+#else
+  return 0;
+#endif
+}
 
-static __inline void     PIN_nTRST_OUT  (uint32_t bit) { (void)bit; }
+static __inline uint32_t PIN_nTRST_IN (void) 
+{ 
+#if (DAP_JTAG != 0)
+  return (GPIO_IDR(nTRST_GPIO_PORT) & nTRST_GPIO_PIN) ? 0x1 : 0x0;
+#else
+  return 0;
+#endif
+}
+
+static __inline void     PIN_nTRST_OUT  (uint32_t bit) 
+{
+#if (DAP_JTAG != 0)
+  if(bit & 0x1)
+    GPIO_BSRR(nTRST_GPIO_PORT) = nTRST_GPIO_PIN;
+  else
+    GPIO_BRR(nTRST_GPIO_PORT) = nTRST_GPIO_PIN;
+#endif
+}
 
 /*
   other functionality not applicable to this application

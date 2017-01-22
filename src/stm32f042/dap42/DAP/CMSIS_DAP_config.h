@@ -74,7 +74,7 @@ Provides definitions about:
 /// a Cortex-M0+ processor with high-speed peripheral I/O only 1 processor cycle might be
 /// required.
 #define IO_PORT_WRITE_CYCLES    2               ///< I/O Cycles: 2=default, 1=Cortex-M0+ fast I/0
-
+#define CONF_JTAG
 /// Indicate that Serial Wire Debug (SWD) communication mode is available at the Debug Access Port.
 /// This information is returned by the command \ref DAP_Info as part of <b>Capabilities</b>.
 #define DAP_SWD                 1               ///< SWD Mode:  1 = available, 0 = not available
@@ -121,7 +121,7 @@ Provides definitions about:
 
 #if TARGET_DEVICE_FIXED
 #define TARGET_DEVICE_VENDOR    ""              ///< String indicating the Silicon Vendor
-#define TARGET_DEVICE_NAME      ""              ///< String indicating the Target Device
+#define TARGET_DEVICE_NAME      "CMSIS-DAP72"              ///< String indicating the Target Device
 #endif
 
 ///@}
@@ -132,6 +132,17 @@ Provides definitions about:
 #define SWDIO_GPIO_PIN          GPIO5
 #define nRESET_GPIO_PORT        GPIOB
 #define nRESET_GPIO_PIN         GPIO1
+
+#define nTRST_GPIO_PORT nRESET_GPIO_PORT
+#define nTRST_GPIO_PIN  nRESET_GPIO_PIN
+#define TCK_GPIO_PORT SWCLK_GPIO_PORT
+#define TCK_GPIO_PIN  SWCLK_GPIO_PIN
+#define TMS_GPIO_PORT SWDIO_GPIO_PORT
+#define TMS_GPIO_PIN  SWDIO_GPIO_PIN
+#define TDO_GPIO_PORT GPIOA
+#define TDO_GPIO_PIN  GPIO7
+#define TDI_GPIO_PORT GPIOB
+#define TDI_GPIO_PIN  GPIO0
 
 #define LED_CON_GPIO_PORT       GPIOA
 #define LED_CON_GPIO_PIN        GPIO0
