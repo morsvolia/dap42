@@ -53,4 +53,8 @@ typedef uint16_t usart_word_t;
 
 #define LED_OPEN_DRAIN         0
 
+#define XREF_8MHZ  8
+#define XREF_12MHZ 12
+#define XREF_16MHZ 16
+
 #endif

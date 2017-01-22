@@ -29,7 +29,13 @@ void cpu_setup(void) {
 
 /* Set STM32 to 72 MHz. */
 void clock_setup(void) {
+#if (XTAL_USE==XREF_8MHZ)
     rcc_clock_setup_in_hse_8mhz_out_72mhz();
+#elif (XTAL_USE==XREF_12MHZ)
+    rcc_clock_setup_in_hse_12mhz_out_72mhz();
+#elif (XTAL_USE==XREF_16MHZ)
+    rcc_clock_setup_in_hse_16mhz_out_72mhz();
+#endif
 }
 
 void gpio_setup(void) {

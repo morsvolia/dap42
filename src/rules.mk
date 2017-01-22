@@ -37,7 +37,7 @@ ifeq ($(ARCH),STM32F0)
 endif
 ifeq ($(ARCH),STM32F1)
 	LIBNAME     = opencm3_stm32f1
-	DEFS       += -DSTM32F1
+	DEFS       += -DSTM32F1 -DXTAL_USE=XREF_12MHZ
 	FP_FLAGS   ?= -msoft-float
 	ARCH_FLAGS  = -mthumb -mcpu=cortex-m3 $(FP_FLAGS) -mfix-cortex-m3-ldrd
 	OOCD_BOARD ?= target/stm32f1x.cfg

@@ -63,7 +63,7 @@ endif
 ifeq ($(TARGET),STLINKV2-DONGLE)
 	TARGET_COMMON_DIR  := ./stm32f103
 	TARGET_SPEC_DIR    := ./stm32f103/stlinkv2-dongle
-	LDSCRIPT           ?= ./stm32f103/stm32f103x8.ld
+	LDSCRIPT           ?= ./stm32f103/stm32f103xb.ld
 	DEFS               += -DDFU_AVAILABLE=0
 	ARCH                = STM32F1
 endif
