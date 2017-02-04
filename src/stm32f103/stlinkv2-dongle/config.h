@@ -51,7 +51,7 @@
 /* Word size for usart_recv and usart_send */
 typedef uint16_t usart_word_t;
 
-#define LED_OPEN_DRAIN         0
+#define LED_OPEN_DRAIN         1
 
 #define XREF_8MHZ  8
 #define XREF_12MHZ 12
